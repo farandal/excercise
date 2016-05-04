@@ -7,6 +7,12 @@
 
 module.exports = {
 
+	 _config: {
+	    actions: false,
+	    shortcuts: false,
+	    rest: false
+	  },
+
 	read: function(req, res) {
   		
   		var productId = req.param("productId");
@@ -18,8 +24,7 @@ module.exports = {
 			return res.send(result);
 		});
 
-  	},
-
-	
+  	}
+  	
 };
 

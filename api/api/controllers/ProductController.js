@@ -14,6 +14,12 @@ module.exports = {
 			2.     For each product, needs to include the Product ID, Name, Description, Brand Name and the most recent Review for this product (including the User Name and Review Summary).
 			3.     Accepts an optional Brand ID parameter to filter the results. If a Brand ID provided, returns only products for that brand.
 	*/
+
+	 _config: {
+	    actions: false,
+	    shortcuts: false,
+	    rest: false
+	  },
 	
 	newest: function (req, res) {
 		
