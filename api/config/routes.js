@@ -21,21 +21,14 @@
  */
 
 module.exports.routes = {
-
-  '/': {
-    view: 'homepage'
-  },
-
-  '/products': {
-    view: 'products'
-  },
   
-  'get /products/new': 'ProductController.newest',
+  'get /products': 'ProductController.newest',
   'get /products/brand/:brandId': 'ProductController.brand',
   
   'get /products/:productId': 'ProductController.read',
   'post /products' : 'ProductController.create',
   'post /products/:productId' : 'ProductController.update',
+  
   'delete /products/:productId' : 'ProductController.delete',
 
   'get /products/:productId/reviews': 'ReviewController.read'

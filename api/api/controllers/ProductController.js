@@ -23,11 +23,10 @@ module.exports = {
 	
 	newest: function (req, res) {
 		
-		return Product.search({limit:10}).then(function(error,result) {
-			if(error) {
-				return res.send(error);
-			}
-			return res.send(result);
+		return Product.search({limit:"10"}).then(function(result) {
+			 res.send(result);
+		}).catch(function(error) {
+			 res.send(Utils.parseError(error));
 		});
 
   	},
@@ -36,11 +35,12 @@ module.exports = {
 
   		var brandId = req.param("brandId");
 
-		return Product.search({brandId:brandId}).then(function(error,result) {
-			if(error) {
-				return res.send(error);
-			}
-			return res.send(result);
+		return Product.search({brandId:brandId}).then(function(result) {
+			 res.send(result);
+		}).catch(function(error) {
+			
+			 	 res.send(Utils.parseError(error));
+
 		});
 
   	},
@@ -49,11 +49,13 @@ module.exports = {
   		
   		var productId = req.param("productId");
 
-  		return Product.read(productId).then(function(error,result) {
-			if(error) {
-				return res.send(error);
-			}
-			return res.send(result);
+  		return Product.read(productId).then(function(result) {
+			
+			 res.send(result);
+		}).catch(function(error) {
+
+			 	 res.send(Utils.parseError(error));
+
 		});
 
   	},
@@ -73,22 +75,21 @@ module.exports = {
 
 		return Product.validate(productObj).then(function(success) {
 
-			return Product.create(productObj).then(function(error,result) {
-				if(error) {
-					return res.send(error);
-				}
-				return res.send(result);
+			return Product.create(productObj).then(function(result) {
+					res.send(result);
+			}).catch(function(error) {
+					 	 res.send(Utils.parseError(error));
 			});
 
-		}).catch(function(response) {
-			return res.send(response);
+		}).catch(function(error) {
+			 	 res.send(Utils.parseError(error));
 		});
 
   	},
 
   	update: function(req, res) {
 
-  		var productId = req.param("productId");
+  		var productId = parseInt(req.param("productId"));
 
   		var productObj = {
 			brandId: req.param("brandId"),
@@ -103,28 +104,30 @@ module.exports = {
 
 		return Product.validate(productObj).then(function(success) {
 
-			return Product.update(productObj).then(function(error,result) {
-				if(error) {
-					return res.send(error);
-				}
-				return res.send(result);
+			return Product.update(productObj).then(function(result) {
+				
+				 res.send(result);
+			}).catch(function(error) {
+						 res.send(Utils.parseError(error));
 			});
 
-		}).catch(function(response) {
-			return res.send(response);
+		}).catch(function(error) {
+			 	 res.send(Utils.parseError(error));
 		});
 
   	},
 
   	delete: function(req, res) {
 
-  		var productId = req.param("productId");
+  		var productId = parseInt(req.param("productId"));
 
-  		return Product.delete(productId).then(function(error,result) {
-			if(error) {
-				return res.send(error);
-			}
-			return res.send(result);
+  		return Product.delete(productId).then(function(result) {
+			
+			 res.send(result);
+		}).catch(function(error) {
+
+				 res.send(Utils.parseError(error));
+
 		});
 
   	}

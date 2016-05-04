@@ -21,10 +21,12 @@ module.exports = {
 		var check = validator.isObject()
 		  .withRequired('brandId', validator.isNumber())
 		  .withRequired('userId', validator.isNumber())
-		  .withRequired('name', validator.isString());
+		  .withRequired('name', validator.isNumber());
+		  
+
 		 
 		validator.run(check, object, function(errorCount, errors) {
-		
+			sails.log.info({errorCount:errorCount, errors:errors})
 			if(errorCount === 0) {
 				resolve(true);
 			} else {
@@ -113,6 +115,7 @@ module.exports = {
 				sails.log.info(query);
 				
 				Product.query(query, function(err, results) {
+					sails.log.info({err:err, results:results})
 					  if (err) {
 					  	reject(err);
 					  }
@@ -146,6 +149,7 @@ module.exports = {
 				sails.log.info(query);
 				
 				Product.query(query, function(err, results) {
+					  sails.log.info({err:err, results:results})
 					  if (err) {
 					  	reject(err);
 					  }
@@ -170,6 +174,7 @@ module.exports = {
 				sails.log.info(query);
 				
 				Product.query(query, function(err, results) {
+					sails.log.info({err:err, results:results})
 					  if (err) {
 					  	reject(err);
 					  }
@@ -182,62 +187,105 @@ module.exports = {
 
   search: function(opts) {
 
+  		sails.log.info(opts);
+
 			return new Promise(function(resolve, reject) {
+
+				var _resolve = resolve;
+				var _reject = reject;
 
 				if(!opts) {
 					var err = new Error();
 					err.message("Options not defined");
-					reject(err,null);
+					return _reject(err);
 				}
 
-				if(!opts.limit) { opts.limit = 10; }
-				if(!opts.page) { opts.page = 0; }
+				if(!opts.limit) { opts.limit = "10"; } 
+				if(!opts.page) { opts.page = "0"; }
 				if(!opts.filter) { opts.filter = "createdAt"; }
 				if(!opts.order) { opts.order = "DESC"; }
 				//if(!opts.active) { opts.active = 1; }
 				
 				var where = "";
-				
-				if(opts.brandId) {
-					where = " WHERE p1.idBrand = "+opts.brandId;
-				}
 
-				var query = "SELECT \
-								p1.id, \
-								p1.name, \
-								p1.description, \
-								Brand.name as brand, \
-								latestreview.username, \
-								latestreview.comment, \
-								latestreview.rating \
-							FROM \
-								Product as p1 \
-							LEFT JOIN Brand ON p1.idBrand = Brand.id \
-							LEFT JOIN \
-								(SELECT \
-									p2.id as pid, \
-									User.name as username, \
-									Review.comment, \
-									Review.rating \
-								FROM \
-									Review, \
-									Product as p2 \
-								LEFT JOIN User ON p2.idUser = User.id \
-								ORDER BY Review.createdAt DESC \
-								LIMIT 0,1 \
-								) as latestreview ON p1.id = latestreview.pid \
-							"+where+"  \
-							ORDER BY p1."+opts.filter+" "+opts.order+"  \
-							LIMIT "+opts.page+","+opts.limit+";";
+				var _validate = function(object) {
+  						return new Promise(function(resolve, reject) {
+								
+								var check = validator.isObject()
+								  .withOptional('brandId', validator.isStringOrNull({regex: /[0-9]+/, message: 'BrandId must be a number'}))
+								  .withOptional('limit', validator.isStringOrNull({regex: /[0-9]+/, message: 'Limit must be a number'}))
+								  .withOptional('filter', validator.isStringOrNull())
+								  .withOptional('page', validator.isStringOrNull({regex: /[0-9]+/, message: 'Page must be a number'}))
+								  .withOptional('order', validator.isStringOrNull());
+								  //.withOptional('active', validator.isNumber())
+								 
+								validator.run(check, object, function(errorCount, errors) {
+								sails.log.info({errorCount:errorCount, errors:errors})
+									if(errorCount === 0) {
+										return resolve(object);
+									} else {
+										return reject(errors);
+									}
 
-				sails.log.info(query);
+								});
+						});
+  				};
 				
-				Product.query(query, function(err, results) {
-					  if (err) {
-					  	reject(err);
-					  }
-					  resolve(results);
-					});
+				_validate(opts).then(function(object) {
+
+					sails.log.info(object);
+
+					if(object.brandId) {
+						where = " WHERE p1.idBrand = "+parseInt(object.brandId);
+					}
+
+						var query = "SELECT \
+										p1.id, \
+										p1.name, \
+										p1.description, \
+										Brand.name as brand, \
+										latestreview.username, \
+										latestreview.comment, \
+										latestreview.rating \
+									FROM \
+										Product as p1 \
+									LEFT JOIN Brand ON p1.idBrand = Brand.id \
+									LEFT JOIN \
+										(SELECT \
+											p2.id as pid, \
+											User.name as username, \
+											Review.comment, \
+											Review.rating \
+										FROM \
+											Review, \
+											Product as p2 \
+										LEFT JOIN User ON p2.idUser = User.id \
+										ORDER BY Review.createdAt DESC \
+										LIMIT 0,1 \
+										) as latestreview ON p1.id = latestreview.pid \
+									"+where+"  \
+									ORDER BY p1."+object.filter+" "+object.order+"  \
+									LIMIT "+parseInt(object.page)+","+parseInt(object.limit)+";";
+
+						sails.log.info(query);
+						
+						Product.query(query, function(err, results) {
+							sails.log.info({err:err, results:results})
+							  if (err) {
+							  
+							  	return _reject(err);
+							  }
+							
+							  return _resolve(results);
+							});
+
+				}).catch(function(err) {
+
+						return _reject(err);
+
+				});
+
+
 			});
 
 	}
