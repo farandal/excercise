@@ -26,7 +26,11 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'get /products': 'ProductController.newest',
+  '/products': {
+    view: 'products'
+  },
+  
+  'get /products/new': 'ProductController.newest',
   'get /products/brand/:brandId': 'ProductController.brand',
   
   'get /products/:productId': 'ProductController.read',
