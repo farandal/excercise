@@ -43,7 +43,7 @@ module.exports = {
   		
   		var productId = req.param("productId");
 
-  		return Product.read({productId:productId}).then(function(error,result) {
+  		return Product.read(productId).then(function(error,result) {
 			if(error) {
 				return res.send(error);
 			}
@@ -53,8 +53,6 @@ module.exports = {
   	},
 
   	create: function(req, res) {
-
-
 
   		var productObj = {
 			brandId: req.param("brandId"),

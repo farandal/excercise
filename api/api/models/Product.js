@@ -37,24 +37,43 @@ module.exports = {
 
   },
 
-  read: function(opts) {
+  read: function(productId) {
+
+  	sails.log.error(productId);
 
   		return new Promise(function(resolve, reject) {
 
-				if(!opts || !opts.productId) {
+				if(!productId) {
 					var err = new Error();
 					err.message("Missing Product Id");
 					reject(err,null);
 				}
 
-				var query = "SELECT  \
-								Product.id,  \
-								Product.name,  \
-								Product.description,  \
-								Brand.name as brand  \
-							FROM Product  \
-							LEFT JOIN Brand ON Product.idBrand = Brand.id  \
-							WHERE Product.id = "+opts.productId+";";
+				var query = "SELECT \
+								p1.id, \
+								p1.name, \
+								p1.description, \
+								Brand.name as brand, \
+								latestreview.username, \
+								latestreview.comment, \
+								latestreview.rating \
+							FROM \
+								Product as p1 \
+							LEFT JOIN Brand ON p1.idBrand = Brand.id \
+							LEFT JOIN \
+								(SELECT \
+									p2.id as pid, \
+									User.name as username,\
+									Review.comment, \
+									Review.rating \
+								FROM Review, \
+									Product as p2 \
+									LEFT JOIN User ON p2.idUser = User.id \
+									WHERE \
+										p2.id = "+productId+" \
+										ORDER BY Review.createdAt DESC LIMIT 0,1 \
+								) as latestreview ON p1.id = latestreview.pid \
+  							WHERE p1.id = "+productId+";";
 
 				sails.log.info(query);
 				
@@ -180,18 +199,35 @@ module.exports = {
 				var where = "";
 				
 				if(opts.brandId) {
-					where = " WHERE idBrand = "+opts.brandId;
+					where = " WHERE p1.idBrand = "+opts.brandId;
 				}
 
-				var query = "SELECT  \
-								Product.id,  \
-								Product.name,  \
-								Product.description,  \
-								Brand.name as brand  \
-							FROM Product  \
-							LEFT JOIN Brand ON Product.idBrand = Brand.id  \
+				var query = "SELECT \
+								p1.id, \
+								p1.name, \
+								p1.description, \
+								Brand.name as brand, \
+								latestreview.username, \
+								latestreview.comment, \
+								latestreview.rating \
+							FROM \
+								Product as p1 \
+							LEFT JOIN Brand ON p1.idBrand = Brand.id \
+							LEFT JOIN \
+								(SELECT \
+									p2.id as pid, \
+									User.name as username, \
+									Review.comment, \
+									Review.rating \
+								FROM \
+									Review, \
+									Product as p2 \
+								LEFT JOIN User ON p2.idUser = User.id \
+								ORDER BY Review.createdAt DESC \
+								LIMIT 0,1 \
+								) as latestreview ON p1.id = latestreview.pid \
 							"+where+"  \
-							ORDER BY "+opts.filter+" "+opts.order+"  \
+							ORDER BY p1."+opts.filter+" "+opts.order+"  \
 							LIMIT "+opts.page+","+opts.limit+";";
 
 				sails.log.info(query);
