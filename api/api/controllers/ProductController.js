@@ -26,6 +26,7 @@ module.exports = {
 		return Product.search({limit:"10"}).then(function(result) {
 			 res.send(result);
 		}).catch(function(error) {
+			//res.status(500);
 			 res.send(Utils.parseError(error));
 		});
 
@@ -38,7 +39,7 @@ module.exports = {
 		return Product.search({brandId:brandId}).then(function(result) {
 			 res.send(result);
 		}).catch(function(error) {
-			
+			//res.status(500);
 			 	 res.send(Utils.parseError(error));
 
 		});
@@ -53,7 +54,7 @@ module.exports = {
 			
 			 res.send(result);
 		}).catch(function(error) {
-
+				//res.status(500);
 			 	 res.send(Utils.parseError(error));
 
 		});
@@ -78,10 +79,12 @@ module.exports = {
 			return Product.create(productObj).then(function(result) {
 					res.send(result);
 			}).catch(function(error) {
+						//res.status(500);
 					 	 res.send(Utils.parseError(error));
 			});
 
 		}).catch(function(error) {
+				//res.status(500);
 			 	 res.send(Utils.parseError(error));
 		});
 
@@ -108,10 +111,12 @@ module.exports = {
 				
 				 res.send(result);
 			}).catch(function(error) {
+							//res.status(500);
 						 res.send(Utils.parseError(error));
 			});
 
 		}).catch(function(error) {
+			//res.status(500);
 			 	 res.send(Utils.parseError(error));
 		});
 
@@ -125,7 +130,7 @@ module.exports = {
 			
 			 res.send(result);
 		}).catch(function(error) {
-
+				//res.status(500);
 				 res.send(Utils.parseError(error));
 
 		});

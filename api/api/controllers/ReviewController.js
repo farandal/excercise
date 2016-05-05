@@ -17,14 +17,37 @@ module.exports = {
   		
   		var productId = req.param("productId");
 
-  		return Review.all(productId).then(function(error,result) {
-			if(error) {
-				return res.send(error);
-			}
-			return res.send(result);
+  		return Review.all(productId).then(function(result) {
+			
+			 res.send(result);
+		}).catch(function(error) {
+				//res.status(500);
+				res.send(Utils.parseError(error));
+			
 		});
 
-  	}
+  	},
+	  
+	post: function(req,res) {
+		
+		
+	    var object = {
+			productId : req.param("productId"),
+			username : req.param("username"),
+			comment : req.param("comment"),
+			rating : req.param("rating") || 0
+		}
+		
+		return Review.post(object).then(function(result) {
+			
+			 res.send(result);
+		}).catch(function(error) {
+				//res.status(500);
+				res.send(Utils.parseError(error));
+			
+		});
+		
+	}
   	
 };
 

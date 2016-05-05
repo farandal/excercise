@@ -31,6 +31,7 @@ module.exports.routes = {
   
   'delete /products/:productId' : 'ProductController.delete',
 
-  'get /products/:productId/reviews': 'ReviewController.read'
+  'get /products/:productId/reviews': 'ReviewController.read',
+  'post /products/:productId/reviews': 'ReviewController.post'
 
 };

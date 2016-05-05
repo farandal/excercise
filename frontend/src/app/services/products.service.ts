@@ -2,7 +2,8 @@ import { Injectable }     from '@angular/core';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {Http, Response, HTTP_PROVIDERS} from "angular2/http";
+import {Http,Headers, Response, HTTP_PROVIDERS,RequestOptions,RequestMethod,RequestOptionsArgs} from "angular2/http";
+import { Review } from 'app/models/review';
 
 @Injectable()
 export class ProductsService {
@@ -13,6 +14,12 @@ export class ProductsService {
   
   request (query: string): Observable<any> {
     return this.http.get(this.apiBaseUrl +query)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+  
+  post (query: string,params): Observable<any> {
+    return this.http.post(this.apiBaseUrl +query,params)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
@@ -36,9 +43,19 @@ export class ProductsService {
   public getProductReviews(productId: string) {
       return this.request("products/"+productId+"/reviews");  
   }
+  
+  public postReview(review: Review) {
+    
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.post("products/"+review.productId+"/reviews",JSON.stringify(review),{
+        headers: headers
+    });  
+  }
     
   private extractData(res: Response) {
-    if (res.status < 200 || res.status >= 300) {
+      
+    if (res.status < 200 || res.status >= 300  ) {
       throw new Error('Bad response status: ' + res.status);
     }
     let body = res.json();

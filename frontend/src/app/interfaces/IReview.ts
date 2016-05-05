@@ -1,4 +1,4 @@
-export interface Review {
+export interface IReview {
   productId: string;
   username: string;
   comment: string;

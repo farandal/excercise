@@ -1,8 +1,7 @@
 import { Component} from 'angular2/core';
 import { RouterActive } from 'app/router-active';
 import { ProductsService } from 'app/services/products.service';
-import { Product } from 'app/interfaces/product';
-import { Review } from 'app/interfaces/review';
+import { IProduct } from 'app/interfaces/IProduct';
 import {Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig, RouteParams} from 'angular2/router';
 
 @Component({
@@ -14,7 +13,7 @@ import {Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig, RouteParams} f
 
 export class ProductList {
   
-  products: Array<Product>;
+  products: Array<IProduct>;
   brands: Array<any>;
   brandId: string;
  

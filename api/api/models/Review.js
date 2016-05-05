@@ -18,7 +18,7 @@ module.exports = {
 				if(!productId) {
 					var err = new Error();
 					err.message("Missing Product Id");
-					reject(err,null);
+					reject(err);
 				}
 
 				var query = "SELECT \
@@ -39,7 +39,8 @@ module.exports = {
 				
 				Review.query(query, function(err, results) {
 					  if (err) {
-					  	reject(err);
+					  	sails.log.error(err.code);
+					  	reject(err.code);
 					  }
 					  resolve(results);
 					});
@@ -54,7 +55,7 @@ module.exports = {
 				if(!productId) {
 					var err = new Error();
 					err.message("Missing Product Id");
-					reject(err,null);
+					reject(err);
 				}
 
 				var query = "SELECT \
@@ -75,7 +76,8 @@ module.exports = {
 				
 				Review.query(query, function(err, results) {
 					  if (err) {
-					  	reject(err);
+					  		sails.log.error(err.code);
+					  	reject(err.code);
 					  }
 					  resolve(results);
 					});
@@ -83,8 +85,29 @@ module.exports = {
 
   },
 
+  post: function(reviewObject) {
+			
+		return new Promise(function(resolve, reject) {
 
+				if(!reviewObject.productId) {
+					var err = new Error();
+					err.message("Missing Product Id");
+					reject(err);
+				}
 
+				var query = "INSERT INTO Review (idProduct,idUser,comment,rating) VALUES ("+reviewObject.productId+",'"+reviewObject.username+"','"+reviewObject.comment+"',"+reviewObject.rating+");"
+					
+				sails.log.info(query);
+				
+				Review.query(query, function(err, results) {
+					  if (err) {
+							sails.log.error(err.code);
+					  	reject(err.code);
+					  }
+					  resolve(results);
+					});
+			});
 
+	}
 
 };
