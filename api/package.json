@@ -49,7 +49,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/farandal/api.git"
+    "url": "git://github.com/farandal/exercise.git"
   },
   "author": "farandal",
   "license": "",
