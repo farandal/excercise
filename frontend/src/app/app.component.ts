@@ -1,13 +1,13 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component, ViewEncapsulation} from '@angular/core';
-import {RouteConfig, Router} from '@angular/router-deprecated';
+import {Component, ViewEncapsulation,provide} from '@angular/core';
+import {RouteConfig, Router,ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {ModalConfig} from 'angular2-modal';
 
 import {Home} from './pages/home/home.component';
 import {AppState} from './app.service';
 import {RouterActive} from './router-active';
-import {RouterLink, RouteParams, RouterOutlet } from 'angular2/router';
 /*
  * App Component
  * Top Level Component
@@ -17,7 +17,7 @@ import {RouterLink, RouteParams, RouterOutlet } from 'angular2/router';
   selector: 'app',
   pipes: [ ],
   providers: [ ],
-  directives: [ RouterLink, RouterActive ],
+  directives: [ RouterActive , ROUTER_DIRECTIVES],
   encapsulation: ViewEncapsulation.None,
   template: `<router-outlet></router-outlet>`,
   styles: [ require('../assets/css/importer.less')  ]
@@ -25,7 +25,8 @@ import {RouterLink, RouteParams, RouterOutlet } from 'angular2/router';
 @RouteConfig([
   { path: '/',      name: 'Index', component: Home, useAsDefault: true },
   { path: '/home',  name: 'Home',  component: Home },
-  { path: '/products',  name: 'Products',   loader: () => require('es6-promise!./pages/products/products.component')('Products') }
+  { path: '/products',  name: 'Products', loader: () => require('es6-promise!./pages/products/products.component')('Products') },
+  {path:  '/products/:id', name: 'ProductDetail',loader: () => require('es6-promise!./pages/products/productdetail.component')('ProductDetail')},
 ])
 export class App {
   angularclassLogo = 'assets/img/angularclass-avatar.png';

@@ -3,7 +3,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import {Header} from '../../shared/components/header/header.component';
 import {Footer} from '../../shared/components/footer/footer.component';
 import {ProductList} from './components/productlist.component';
-import { ROUTER_DIRECTIVES, RouterLink, RouteParams, RouterOutlet } from 'angular2/router';
+import {Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig, RouteParams} from 'angular2/router';
 
 @Component({
   selector: 'products',
@@ -11,7 +11,7 @@ import { ROUTER_DIRECTIVES, RouterLink, RouteParams, RouterOutlet } from 'angula
     Header,
     Footer,
     ProductList,
-    RouterLink
+    ROUTER_DIRECTIVES
   ],
   template: require('./products.template.html')
 })

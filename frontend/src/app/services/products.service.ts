@@ -12,17 +12,25 @@ export class ProductsService {
   private apiBaseUrl = 'http://localhost:1337/';  // URL to web api
   
   request (query: string): Observable<any> {
-    return this.http.get(this.apiBaseUrl + "products" +query)
+    return this.http.get(this.apiBaseUrl +query)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
   
   public getProducts() {
-      return this.request("/");
+      return this.request("products/");
+  }
+  
+  public getProduct(productId: string) {
+      return this.request("products/"+productId);
   }
   
   public getProductsByBrand(brandId: string) {
-      return this.request("/brand/"+brandId);
+      return this.request("products/brand/"+brandId);
+  }
+  
+  public getBrands() {
+      return this.request("brand");
   }
   
   public getProductReviews(productId: string) {

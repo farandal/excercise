@@ -1,14 +1,45 @@
 <h2>ProductList</h2>
 
- <md-card *ngFor="let product of products" >
+<md-sidenav-layout class="demo-sidenav-layout">
+  <md-sidenav #start mode="side">
+    <button md-button (click)="start.close()">X</button>
+    
+    <!--
+    <button md-button
+            (click)="start.mode = (start.mode == 'push' ? 'over' : (start.mode == 'over' ? 'side' : 'push'))">Toggle Mode</button>
+    <div>Mode: {{start.mode}}</div>
+    <br>
+    Search
+    <input #myinput>
+    -->
+
+ <md-list  class="md-dense">
+  
+   <md-list-item (click)="goToBrand(brand.id)" *ngFor="let brand of brands">
+      {{ brand.name }}
+   </md-list-item>
+</md-list>
+
+
+  </md-sidenav>
+
+  <div class="demo-sidenav-content">
+
+    <div>
+      <button md-button (click)="start.toggle()">< MENU</button>
+    </div>
+
+     <md-card *ngFor="let product of products" >
       <md-card-subtitle>{{product.brand}}</md-card-subtitle>
       <md-card-title>{{product.name}}</md-card-title>
       <md-card-content>
         <p>{{product.description}}</p>
-        
       </md-card-content>
       <md-card-actions>
         <button md-button>Rating: {{product.rating}}</button>
-        <button md-button>Detail</button>
+        <button (click)="goToDetail(product.id)" md-button>Detail</button>
       </md-card-actions>
-</md-card>
+    </md-card>
+    
+  </div>
+</md-sidenav-layout>
