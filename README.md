@@ -1,6 +1,73 @@
+#Exercise
+
+The project is divided in 2 apps. 
+The API, is a Sails.js application that returns the queries in json formal. 
+The FRONTEND, is an Angular2 application, that display the products data.
+
+How to install in localhost
+
+## Enviorement requirements
+
+* mysql
+* node
+* npm
+
+## Configure your mysql database
+
+Use phpmyadmin or command line to import the mysqldump for testing:
+https://github.com/farandal/excercise/blob/master/docs/exercise_test_dump.sql
+
+```
+git clone https://github.com/farandal/excercise
+cd exercise/docs
+mysql -uroot -pxxx exercise < exercise_test_dump.sql
+```
+
+## Install and Configure the API
+
+```
+
+#install global dependencies
+
+sudo npm -g install sails
+cd exercise/api
+npm install 
+cd ..
+
+#open in sublime, nano or favorite editor, and modify the mysql credentials
+
+subl api/config/connection.js
+
+#start the service
+
+sails lift
+
+```
+
+## Install and Configure the FRONTEND APP
+
+```
+
+#start the frontend app
+#http://localhost:3000
+cd exercise/frontend
+npm install
+npm start
+
+```
+
 # Sails.js + Mysql plain SQL queries SIMPLE REST API
 
-* GET /products
+## Enabled Endpoints:
+
+* * GET /products
+* * GET  /products/brand/:brandId - Get products by Brand Id
+* * GET  /products/:productId - Product Detail 
+* * GET  /products/:productId/reviews - Get all product reviews
+* * POST /products/:productId/reviews - Post a review
+
+
+Example GET /products output format
 
 ```json
 [
@@ -24,14 +91,6 @@
 }
 ]
 ```
-
-## Enabled Endpoints:
-
-* * GET  /products/brand/:brandId - Get products by Brand Id
-* * GET  /products/:productId - Product Detail 
-* * GET  /products/:productId/reviews - Get all product reviews
-* * POST /products/:productId/review - Post a review
-
 
 ## Common SQL Query for product listing. Get latest review from Review table. 
 
@@ -89,3 +148,9 @@ ON USER.id = Review.idUser
 WHERE 
 Review.idProduct = ?
 ```
+
+## Unit Testing
+
+
+
+
