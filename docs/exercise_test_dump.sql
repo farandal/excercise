@@ -27,7 +27,7 @@ CREATE TABLE `Brand` (
   `name` varchar(255) DEFAULT NULL,
   `description` text,
   `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -60,7 +60,7 @@ CREATE TABLE `Product` (
   `colour` varchar(10) DEFAULT 'white',
   `colourcode` varchar(6) DEFAULT 'FFFFFF',
   `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL,
   `availability` enum('In Stock','Out Of Stock','Archived') DEFAULT 'Archived',
   PRIMARY KEY (`id`),
   KEY `idBrand` (`idBrand`),
@@ -91,7 +91,7 @@ CREATE TABLE `Review` (
   `idUser` int(11) NOT NULL,
   `comment` text NOT NULL,
   `rating` int(2) NOT NULL DEFAULT '0',
-  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL,
   `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idProduct` (`idProduct`),
