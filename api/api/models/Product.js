@@ -81,7 +81,9 @@ module.exports = {
 				
 				Product.query(query, function(err, results) {
 					  if (err) {
-					  	reject(err);
+					  				var error = new Error();
+									error.message = err.code;
+									reject(error);
 					  }
 					  resolve(results);
 					});
@@ -117,7 +119,9 @@ module.exports = {
 				Product.query(query, function(err, results) {
 					sails.log.info({err:err, results:results})
 					  if (err) {
-					  	reject(err);
+					  				var error = new Error();
+									error.message = err.code;
+									reject(error);
 					  }
 					  resolve(results);
 					});
@@ -151,7 +155,9 @@ module.exports = {
 				Product.query(query, function(err, results) {
 					  sails.log.info({err:err, results:results})
 					  if (err) {
-					  	reject(err);
+					     			var error = new Error();
+									error.message = err.code;
+									reject(error);
 					  }
 					  resolve(results);
 					});
@@ -176,7 +182,9 @@ module.exports = {
 				Product.query(query, function(err, results) {
 					sails.log.info({err:err, results:results})
 					  if (err) {
-					  	reject(err);
+					  				var error = new Error();
+									error.message = err.code;
+									reject(error);
 					  }
 					  resolve(results);
 					});
@@ -272,7 +280,9 @@ module.exports = {
 						Product.query(query, function(err, results) {
 							sails.log.info({err:err, results:results})
 							  if (err) {
-							  
+							  	var error = new Error();
+								error.message = err.code;
+								reject(error);
 							  	return _reject(err);
 							  }
 							
