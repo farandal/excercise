@@ -30,7 +30,6 @@ module.exports = {
 	  
 	post: function(req,res) {
 		
-		
 	    var object = {
 			productId : req.param("productId"),
 			username : req.param("username"),
@@ -39,12 +38,10 @@ module.exports = {
 		}
 		
 		return Review.post(object).then(function(result) {
-			
-			 res.send(result);
+			res.send(result);
 		}).catch(function(error) {
-				//res.status(500);
-				res.send(Utils.parseError(error));
-			
+			//res.status(500);
+			res.send(Utils.parseError(error));
 		});
 		
 	}

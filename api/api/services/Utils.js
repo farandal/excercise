@@ -19,9 +19,9 @@ module.exports = {
 			_err.success = false;
 			_err.error = {type: "api", message: _message}
 
-			if(error) {
+			/*if(error) {
 				_err.payload =  error;
-			}
+			}*/
 			
 			return _err;
 		}
