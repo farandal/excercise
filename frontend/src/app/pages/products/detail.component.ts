@@ -21,7 +21,7 @@ export class ProductDetail {
   error:string;
  
   ratings = ['1', '2', '3','4','5','6','7','8'];
-  model = new Review();
+  model:Review = new Review(this.productId,"","",0);
   
   submitted = false;
   active = true;
@@ -61,7 +61,7 @@ export class ProductDetail {
   }
  
   submitReview() {
-    this.model = new Review();
+    this.model = new Review(this.productId,"","",0);
     this.active = false;
     setTimeout(()=> this.active=true, 0);
   }
