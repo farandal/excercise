@@ -3,7 +3,6 @@
  */
 import {Component, ViewEncapsulation,provide} from '@angular/core';
 import {RouteConfig, Router,ROUTER_DIRECTIVES} from '@angular/router-deprecated';
-import {ModalConfig} from 'angular2-modal';
 
 import {Header} from './shared/components/header/header.component';
 import {Footer} from './shared/components/footer/footer.component';

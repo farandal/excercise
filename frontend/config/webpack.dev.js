@@ -17,8 +17,8 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = webpackMerge(commonConfig.metadata, {
-  host: 'localhost',
-  port: 3000,
+  host: 'frontend.exercise.farandal.com',
+  port: 8088,
   ENV: ENV,
   HMR: HMR
 });

@@ -23,14 +23,14 @@ module.exports = {
 
 				var query = "SELECT \
 								  Review.idProduct AS productId, \
-								  USER.name AS username, \
+								  User.name AS username, \
 								  Review.comment, \
 								  Review.rating \
 								FROM \
 								  Review \
-								LEFT JOIN USER \
+								LEFT JOIN User \
 								ON \
-								  USER.id = Review.idUser \
+								  User.id = Review.idUser \
 								WHERE \
 								  Review.idProduct = "+productId+" \
 								ORDER BY createdAt DESC LIMIT 0,1;";
@@ -62,14 +62,14 @@ module.exports = {
 
 				var query = "SELECT \
 								  Review.idProduct AS productId, \
-								  USER.name AS username, \
+								  User.name AS username, \
 								  Review.comment, \
 								  Review.rating \
 								FROM \
 								  Review \
-								LEFT JOIN USER \
+								LEFT JOIN User \
 								ON \
-								  USER.id = Review.idUser \
+								  User.id = Review.idUser \
 								WHERE \
 								  Review.idProduct = "+productId;
 					

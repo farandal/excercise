@@ -10,7 +10,7 @@ export class ProductsService {
   
   constructor (private http: Http) {}
   
-  private apiBaseUrl = 'http://localhost:1337/';  // URL to web api
+  private apiBaseUrl = 'http://backend.exercise.farandal.com/';  // URL to web api
   
   request (query: string): Observable<any> {
     return this.http.get(this.apiBaseUrl +query)

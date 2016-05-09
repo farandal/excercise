@@ -21,7 +21,7 @@
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.
 process.chdir(__dirname);
-
+console.log(__dirname);
 // Ensure a "sails" can be located:
 (function() {
   var sails;
@@ -56,4 +56,5 @@ process.chdir(__dirname);
 
   // Start server
   sails.lift(rc('sails'));
+  console.log('started');
 })();

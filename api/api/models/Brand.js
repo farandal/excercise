@@ -6,7 +6,9 @@
  */
 
 module.exports = {
-
+ tableName: 'Brand',
+ autoCreatedAt: false,
+ autoUpdatedAt: false,
   attributes: {
 
 	name: {

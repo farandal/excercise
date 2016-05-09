@@ -44,8 +44,8 @@ export class ReviewsComponent {
             if(value.message === "onPostReview") {
                 console.log("onPostReview message received in reviews component");
                  this.getReviews();
-            }
-        }));
+            };
+        });
   }
   
 }

@@ -20,8 +20,8 @@ const WebpackMd5Hash = require('webpack-md5-hash');
  * Webpack Constants
  */
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
-const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 8080;
+const HOST = process.env.HOST || 'frontend.exercise.farandal.com';
+const PORT = process.env.PORT || 8088;
 const METADATA = webpackMerge(commonConfig.metadata, {
   host: HOST,
   port: PORT,
@@ -109,7 +109,7 @@ module.exports = webpackMerge(commonConfig, {
      * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
      * See: https://github.com/webpack/docs/wiki/optimization#deduplication
      */
-    new DedupePlugin(),
+    //new DedupePlugin(),
 
     /**
      * Plugin: DefinePlugin
@@ -154,16 +154,17 @@ module.exports = webpackMerge(commonConfig, {
       // }, // debug
       // comments: true, //debug
 
-      beautify: false, //prod
+      beautify: true, //prod
 
-      mangle: {
-        screw_ie8 : true,
-        keep_fnames: true
-      }, //prod
+      //mangle: {
+      //  screw_ie8 : true,
+      //  keep_fnames: true
+      //}, //prod
 
-      compress: {
-        screw_ie8: true
-      }, //prod
+      //compress: {
+      //  screw_ie8: true
+      //}, 
+      //prod
 
       comments: false //prod
     }),
@@ -181,18 +182,6 @@ module.exports = webpackMerge(commonConfig, {
     })
 
   ],
-
-  /**
-   * Static analysis linter for TypeScript advanced options configuration
-   * Description: An extensible linter for the TypeScript language.
-   *
-   * See: https://github.com/wbuchwalter/tslint-loader
-   */
-  tslint: {
-    emitErrors: true,
-    failOnHint: true,
-    resourcePath: 'src'
-  },
 
   /**
    * Html loader advanced options
