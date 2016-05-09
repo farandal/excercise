@@ -60,11 +60,11 @@ npm start
 
 ## Enabled Endpoints:
 
-* * GET /products
-* * GET  /products/brand/:brandId - Get products by Brand Id
-* * GET  /products/:productId - Product Detail 
-* * GET  /products/:productId/reviews - Get all product reviews
-* * POST /products/:productId/reviews - Post a review
+* GET /products
+* GET  /products/brand/:brandId - Get products by Brand Id
+* GET  /products/:productId - Product Detail 
+* GET  /products/:productId/reviews - Get all product reviews
+* POST /products/:productId/reviews - Post a review
 
 
 Example GET /products output format
@@ -149,8 +149,13 @@ WHERE
 Review.idProduct = ?
 ```
 
-## Unit Testing
+## REST API Tests
 
+Run basic tests with Mocha
+
+```
+npm test
+```
 
 
 
