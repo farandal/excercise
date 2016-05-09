@@ -1,0 +1,14 @@
+[
+    {
+        "productId": 2,
+        "username": "Francisco",
+        "comment": "sdsds",
+        "rating": 4
+    },
+    {
+        "productId": 2,
+        "username": "Adrian",
+        "comment": "s developed by Microsoft, with three consoles released in the sixth, seventh, and eighth generations respectively.",
+        "rating": 2
+    }
+]
