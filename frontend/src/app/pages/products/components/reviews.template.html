@@ -1,0 +1,8 @@
+<h3> Reviews: </h3>
+        <md-card *ngFor="let review of reviews" >
+          <md-card-title>{{review.username}}</md-card-title>
+          <md-card-subtitle>ratinf: {{review.rating}}</md-card-subtitle>    
+          <md-card-content>
+            <p>{{review.comment}}</p>
+          </md-card-content>
+        </md-card>

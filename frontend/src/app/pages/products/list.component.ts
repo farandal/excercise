@@ -1,19 +1,21 @@
 import { Component} from 'angular2/core';
-import { RouterActive } from 'app/router-active';
-import { ProductsService } from 'app/services/products.service';
-import { IProduct } from 'app/interfaces/IProduct';
+
+import { RouterActive } from '../../router-active';
+import { ProductsService } from '../../services/products.service';
+
+
 import {Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig, RouteParams} from 'angular2/router';
 
 @Component({
-	selector: 'productlist',
+	selector: 'router-outlet',
   directives: [RouterActive,ROUTER_DIRECTIVES], 
-	template: require('./productlist.template.html'),
+	template: require('./list.template.html'),
   providers:[ProductsService]
 })
 
 export class ProductList {
   
-  products: Array<IProduct>;
+  products: Array<any>;
   brands: Array<any>;
   brandId: string;
  

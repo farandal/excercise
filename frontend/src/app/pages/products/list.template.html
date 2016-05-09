@@ -20,7 +20,6 @@
    </md-list-item>
 </md-list>
 
-
   </md-sidenav>
 
   <div class="demo-sidenav-content">
@@ -28,7 +27,7 @@
     <div>
       <button md-button (click)="start.toggle()">< MENU</button>
     </div>
-
+    
      <md-card *ngFor="let product of products" >
       <md-card-subtitle>{{product.brand}}</md-card-subtitle>
       <md-card-title>{{product.name}}</md-card-title>
@@ -43,3 +42,5 @@
     
   </div>
 </md-sidenav-layout>
+
+

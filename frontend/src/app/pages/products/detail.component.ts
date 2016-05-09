@@ -1,41 +1,46 @@
 import {Component} from 'angular2/core';
 import { HTTP_PROVIDERS } from '@angular/http';
-import {Header} from '../../shared/components/header/header.component';
-import {Footer} from '../../shared/components/footer/footer.component';
 import {Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig, RouteParams} from 'angular2/router';
-import { ProductsService } from 'app/services/products.service';
-import { IProduct } from 'app/interfaces/IProduct';
-import { IReview } from 'app/interfaces/IReview';
-import { Review } from 'app/models/review';
+import { Review } from '../../models/review';
+import { ProductsService } from '../../services/products.service';
+import { ReviewsComponent } from './components/reviews.component';
 import { NgForm }    from '@angular/common';
+import { Mediator } from '../../services/mediator';
 
 @Component({
-	selector: 'productdetail',
-  directives: [ROUTER_DIRECTIVES], 
-	template: require('./productdetail.template.html'),
-  providers:[ProductsService]
+	selector: 'router-outlet',
+  directives: [ROUTER_DIRECTIVES,ReviewsComponent], 
+	template: require('./detail.template.html'),
+  providers: [ProductsService,Mediator]
 })
 
 export class ProductDetail {
   
-  products: Array<IProduct>;
-  reviews: Array<IReview>;
+  products: Array<any>;
   productId: string;
   error:string;
-  //Form logic:
-  
-  ratings = ['1', '2', '3','4','5','6','7','8'];
  
+  ratings = ['1', '2', '3','4','5','6','7','8'];
   model = new Review();
   
   submitted = false;
   active = true;
   
+   constructor(
+      private productsService: ProductsService,
+      private params: RouteParams,
+      private mediator: Mediator
+      ) { 
+        console.log(mediator);
+        this.productId = params.get("id");
+        console.log("Products Service " + this.productId);
+  }
+  
+  
   onSubmit() { 
    
     console.log("submit");
     this.model.productId = this.productId;
-    
     console.log(this.model);
     
     this.productsService.postReview(this.model).subscribe(
@@ -45,43 +50,34 @@ export class ProductDetail {
              this.error = "An error has ocurred inserting the review "+JSON.stringify(body);
           } else {
               this.error = "";
-              this.getReviews();
+              this.mediator.message("onPostReview");
               this.submitted = true;    
           }
-         
-           
-        
         },
         error => { 
-          console.log(error);
-         
-         }
+          console.log(error); 
+        }
       );
-    
-  
   }
-  
+ 
   submitReview() {
     this.model = new Review();
     this.active = false;
     setTimeout(()=> this.active=true, 0);
   }
   
-  constructor(private productsService: ProductsService,private params: RouteParams) {
-    console.log("Products Service");
-    this.productId = params.get("id");
-  }
-  
+ 
   addReview(productId:string) {
     console.log("add review for product Id"+productId);
     
   }
   
-  getProducts() {
+  getProduct() {
+    
     console.log("get Products");
     this.productsService.getProduct(this.productId).subscribe(
         body => { 
-         
+          this.mediator.message("onGetProduct");
           this.products = body;
         
         },
@@ -89,24 +85,9 @@ export class ProductDetail {
       );
   }
   
-   getReviews() {
-    console.log("get Products Review");
-    this.productsService.getProductReviews(this.productId).subscribe(
-        body => { 
-         console.log(body);
-          this.reviews = body;
-        
-        },
-        error => console.log(error)
-      );
-  }
-  
-
-  
   ngOnInit() {
-    console.log("on Init");
-    this.getProducts();
-     this.getReviews();
+     this.getProduct();
+     this.mediator.onMessage.subscribe(value => console.log("message received in detail component "+value));
   }
 }
 
