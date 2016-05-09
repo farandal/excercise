@@ -5,9 +5,14 @@ import {Component, ViewEncapsulation,provide} from '@angular/core';
 import {RouteConfig, Router,ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {ModalConfig} from 'angular2-modal';
 
+import {Header} from './shared/components/header/header.component';
+import {Footer} from './shared/components/footer/footer.component';
+
 import {Home} from './pages/home/home.component';
+
 import {AppState} from './app.service';
 import {RouterActive} from './router-active';
+
 /*
  * App Component
  * Top Level Component
@@ -17,16 +22,16 @@ import {RouterActive} from './router-active';
   selector: 'app',
   pipes: [ ],
   providers: [ ],
-  directives: [ RouterActive , ROUTER_DIRECTIVES],
+  directives: [ RouterActive , ROUTER_DIRECTIVES,Header,Footer],
   encapsulation: ViewEncapsulation.None,
-  template: `<router-outlet></router-outlet>`,
+  template: require('./app.template.html'),
   styles: [ require('../assets/css/importer.less')  ]
 })
 @RouteConfig([
   { path: '/',      name: 'Index', component: Home, useAsDefault: true },
   { path: '/home',  name: 'Home',  component: Home },
-  { path: '/products',  name: 'Products', loader: () => require('es6-promise!./pages/products/products.component')('Products') },
-  {path:  '/products/:id', name: 'ProductDetail',loader: () => require('es6-promise!./pages/products/productdetail.component')('ProductDetail')},
+  { path: '/products',  name: 'Products', loader: () => require('es6-promise!./pages/products/list.component')('ProductList') },
+  { path: '/products/:id', name: 'ProductDetail',loader: () => require('es6-promise!./pages/products/detail.component')('ProductDetail')},
 ])
 export class App {
   angularclassLogo = 'assets/img/angularclass-avatar.png';
