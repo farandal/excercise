@@ -38,7 +38,7 @@
 
 1.     Accepts parameters for User ID, Product ID, Rating, Comment 
 2.     User ID must exist, and must be for a user with type "Customer" 
-3.     Should perform basic validation and return a descriptive error message if validation fails\n
+3.     Should perform basic validation and return a descriptive error message if validation fails
 
 * Technical acceptance criteria:
 
