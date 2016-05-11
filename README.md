@@ -1,7 +1,7 @@
 #Sails Webpack Typescript Angular2 Mysql Exercise
 
-## Frontend: http://frontend.exercise.farandal.com/
-## API: http://backend.exercise.farandal.com/products
+* Frontend: http://frontend.exercise.farandal.com/
+* API: http://backend.exercise.farandal.com/products
 
 ##Database Architecture
 
@@ -12,6 +12,8 @@
 5.     A Product can have Reviews. Each Review is written by a User.
 6.     A Review needs to have an ID, Rating, Comment. The rating can only be a number between 0 to 10. 
 7.     A User needs to have an ID, User Type, User Name, Email and Date of Birth. Email should be unique (i.e. two users can't have the same email). User Types will be Customer and Merchant
+
+![alt tag](https://github.com/farandal/sails-angular2-exercise/blob/master/docs/exercise_er.png)
 
 ##REST API User Cases
 
