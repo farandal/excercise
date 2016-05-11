@@ -1,4 +1,76 @@
-#Exercise
+#Sails Webpack Typescript Angular2 Mysql Exercise
+
+## Frontend: http://frontend.exercise.farandal.com/
+## API: http://backend.exercise.farandal.com/products
+
+##Database Architecture
+
+1.     The system will store many Products, from many Brands.
+2.     Each Product belongs to a Brand. Each Brand can have many Products.
+3.     Products need to have an ID, Product Name, Description, Price, Colour, Date Created and Availability Status (e.g. In Stock, Out of Stock, Archived).
+4.     A Brand needs to have an ID, Name and Description.
+5.     A Product can have Reviews. Each Review is written by a User.
+6.     A Review needs to have an ID, Rating, Comment. The rating can only be a number between 0 to 10. 
+7.     A User needs to have an ID, User Type, User Name, Email and Date of Birth. Email should be unique (i.e. two users can't have the same email). User Types will be Customer and Merchant
+
+##REST API User Cases
+
+### As any user, I want to call a web service to find the latest Products, so I can display them. 
+
+Acceptance Criteria:
+1.     Returns the 10 newest products. 
+2.     For each product, needs to include the Product ID, Name, Description, Brand Name and the most recent Review for this product (including the User Name and Review Summary).
+3.     Accepts an optional Brand ID parameter to filter the results. If a Brand ID provided, returns only products for that brand.
+
+Technical acceptance criteria:
+1.     RESTful web service that uses JSON as message format
+2.     No authentication required
+3.     Uses a Stored Procedure (not an ORM) to query the database
+
+
+### As a Customer, I want to call a web service to Create a Review, so I can give feedback on a product. 
+
+Acceptance Criteria:
+1.     Accepts parameters for User ID, Product ID, Rating, Comment
+2.     User ID must exist, and must be for a user with type "Customer"
+3.     Should perform basic validation and return a descriptive error message if validation fails
+Technical acceptance criteria:
+1.     RESTful web service that uses JSON as message format
+2.     No authentication required
+
+
+##FRONTEND User Cases
+
+## As a Customer, I want to view the latest Products on the website, so I can choose what to buy. 
+Acceptance Criteria:
+1.     The page accepts an optional Brand ID parameter on the URL to filter the results. If a Brand ID provided, displays only products for that brand. If no Brand ID, then show products from any Brand.
+2.     If no products found, displays a friendly message to the user.
+3.     If matching products are found, the page will display a list of the (up to) 10 newest products, including their Product Name & Description, Brand Name and the most recent review (including the User Name, Rating and Comment).
+4.     Each product in the list should have an "Add Review" link that will take the user to a different page where they can add a Review (this page to be created in the next step). 
+5.     The page should use at least some basic visual styling, but it's up to you how far you want to take this (depending on your front-end development skills etc).
+Technical acceptance criteria:
+1.     Needs to call the Find Products web service you previously created
+2.     Needs to work in current versions of Chrome and Firefox
+3.     No authentication required
+
+##As a Customer, I want to add a new Review via the website, so I can give feedback on a product. 
+
+Acceptance criteria:
+1.     The page accepts a Product ID on the URL. This product must exist. 
+2.     If no matching product found, then show a descriptive message to the user. 
+3.     If the product does exist, then show the Product Name on the form (read only).
+4.     The user can use a form to enter their Email, Rating and Comment. They can then click a "Save" button to submit their review. 
+5.     If the review fails validation, the user should see a descriptive message on the page. 
+6.     If the save is successful, the user should be redirected back to the View Product List page
+7.     The page should have some basic visual styling.
+
+Technical acceptance criteria:
+1.     Needs to call the Add Review web service you previously created
+2.     Needs to work in current versions of Chrome and Firefox
+3.     No authentication required
+
+
+##Solution Overview:
 
 The project is divided in 2 apps. 
 The API, is a Sails.js application that returns the queries in json formal. 
@@ -11,6 +83,11 @@ How to install in localhost
 * mysql
 * node
 * npm
+
+## Isntall dependencies
+
+npm install sails -g
+npm install webpack -g
 
 ## Configure your mysql database
 
