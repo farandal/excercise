@@ -21,9 +21,9 @@
 
 * Acceptance Criteria:
 
-1.     Returns the 10 newest products. \n
-2.     For each product, needs to include the Product ID, Name, Description, Brand Name and the most recent Review for this product (including the User Name and Review Summary). \n
-3.     Accepts an optional Brand ID parameter to filter the results. If a Brand ID provided, returns only products for that brand. \n
+1.     Returns the 10 newest products. 
+2.     For each product, needs to include the Product ID, Name, Description, Brand Name and the most recent Review for this product (including the User Name and Review Summary). 
+3.     Accepts an optional Brand ID parameter to filter the results. If a Brand ID provided, returns only products for that brand. 
 
 * Technical acceptance criteria:
 
@@ -36,14 +36,14 @@
 
 * Acceptance Criteria:
 
-1.     Accepts parameters for User ID, Product ID, Rating, Comment \n
-2.     User ID must exist, and must be for a user with type "Customer" \n
+1.     Accepts parameters for User ID, Product ID, Rating, Comment 
+2.     User ID must exist, and must be for a user with type "Customer" 
 3.     Should perform basic validation and return a descriptive error message if validation fails\n
 
 * Technical acceptance criteria:
 
-1.     RESTful web service that uses JSON as message format \n
-2.     No authentication required \n
+1.     RESTful web service that uses JSON as message format 
+2.     No authentication required 
 
 
 ##FRONTEND User Cases
@@ -52,10 +52,10 @@
 
 * Acceptance Criteria:
 
-1.     The page accepts an optional Brand ID parameter on the URL to filter the results. If a Brand ID provided, displays only products for that brand. If no Brand ID, then show products from any Brand. \n
-2.     If no products found, displays a friendly message to the user.\n
-3.     If matching products are found, the page will display a list of the (up to) 10 newest products, including their Product Name & Description, Brand Name and the most recent review (including the User Name, Rating and Comment).\n
-4.     Each product in the list should have an "Add Review" link that will take the user to a different page where they can add a Review (this page to be created in the next step). \n
+1.     The page accepts an optional Brand ID parameter on the URL to filter the results. If a Brand ID provided, displays only products for that brand. If no Brand ID, then show products from any Brand.
+2.     If no products found, displays a friendly message to the user.
+3.     If matching products are found, the page will display a list of the (up to) 10 newest products, including their Product Name & Description, Brand Name and the most recent review (including the User Name, Rating and Comment).
+4.     Each product in the list should have an "Add Review" link that will take the user to a different page where they can add a Review (this page to be created in the next step). 
 5.     The page should use at least some basic visual styling, but it's up to you how far you want to take this (depending on your front-end development skills etc).\n
 Technical acceptance criteria:
 1.     Needs to call the Find Products web service you previously created
@@ -66,19 +66,19 @@ Technical acceptance criteria:
 
 * Acceptance criteria:
 
-1.     The page accepts a Product ID on the URL. This product must exist. \n
-2.     If no matching product found, then show a descriptive message to the user. \n
-3.     If the product does exist, then show the Product Name on the form (read only).\n
-4.     The user can use a form to enter their Email, Rating and Comment. They can then click a "Save" button to submit their review. \n
-5.     If the review fails validation, the user should see a descriptive message on the page. \n
-6.     If the save is successful, the user should be redirected back to the View Product List page \n
-7.     The page should have some basic visual styling. \n
+1.     The page accepts a Product ID on the URL. This product must exist.
+2.     If no matching product found, then show a descriptive message to the user. 
+3.     If the product does exist, then show the Product Name on the form (read only).
+4.     The user can use a form to enter their Email, Rating and Comment. They can then click a "Save" button to submit their review.
+5.     If the review fails validation, the user should see a descriptive message on the page.
+6.     If the save is successful, the user should be redirected back to the View Product List page 
+7.     The page should have some basic visual styling.
 
 * Technical acceptance criteria:
 
-1.     Needs to call the Add Review web service you previously created \n
-2.     Needs to work in current versions of Chrome and Firefox \n
-3.     No authentication required \n
+1.     Needs to call the Add Review web service you previously created 
+2.     Needs to work in current versions of Chrome and Firefox 
+3.     No authentication required 
 
 ##Solution Overview:
 
